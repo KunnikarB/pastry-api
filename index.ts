@@ -26,3 +26,32 @@ const pastrySchema = z.object({
 });
 
 type PastryInput = z.infer<typeof pastrySchema>;
+
+/********* Mock Data *********/ 
+
+let pastries: Pastry[] = [
+  {
+    id: 1,
+    name: 'Kanelbulle',
+    category: 'bullar',
+    price: 25,
+    stock: 120,
+    ingredients: ['vetemjöl', 'smör', 'socker', 'kanel', 'jäst', 'mjölk'],
+  },
+  {
+    id: 2,
+    name: 'Prinsesstårta',
+    category: 'tårta',
+    price: 65,
+    stock: 20,
+    ingredients: ['marsipan', 'grädde', 'vaniljkräm', 'sockerkaka'],
+  },
+  {
+    id: 3,
+    name: 'Semla',
+    category: 'semla',
+    price: 45,
+    stock: 40,
+    ingredients: ['vetebulle', 'mandelmassa', 'grädde'],
+  },
+];
