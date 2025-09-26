@@ -4,6 +4,9 @@ import { z } from 'zod';
 const app = express();
 const PORT = 3000;
 
+// Parse JSON bodies
+app.use(express.json());
+
 /********* Interfaces *********/ 
  
 interface Pastry {
@@ -61,6 +64,21 @@ let pastries: Pastry[] = [
 // GET all pastries
 app.get('/pastries', (req, res) => {
   res.json(pastries);
+});
+
+// POST a new pastry
+app.post('/pastries', (req, res) => {
+  const parsed = pastrySchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ errors: parsed.error.flatten().fieldErrors });
+  }
+
+  const newPastry: Pastry = {
+    id: pastries.length +1, ...parsed.data
+  };
+
+  pastries.push(newPastry);
+  res.json({message: 'Pastry added successfully!', pastry: newPastry});
 });
 
 /* -----------------------------
