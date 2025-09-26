@@ -55,3 +55,17 @@ let pastries: Pastry[] = [
     ingredients: ['vetebulle', 'mandelmassa', 'grädde'],
   },
 ];
+
+/********* Routes *********/ 
+
+// GET all pastries
+app.get('/pastries', (req, res) => {
+  res.json(pastries);
+});
+
+/* -----------------------------
+   START SERVER
+--------------------------------*/
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+});

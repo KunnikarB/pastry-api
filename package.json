@@ -7,7 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.ts"
   },
-    
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KunnikarB/pastry-api.git"
@@ -15,7 +14,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/KunnikarB/pastry-api/issues"
   },
@@ -27,6 +26,7 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
+    "express": "^5.1.0",
     "zod": "^4.1.11"
   }
 }
