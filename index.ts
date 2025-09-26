@@ -104,6 +104,15 @@ app.put('/pastries/:id', (req, res) => {
   res.json({ message: 'Pastry updated successfully!', pastry });
 });
 
+// DELETE a pastry by id
+app.delete('/pastries/:id', (req, res) => {
+  const index = pastries.findIndex((p) => p.id === +req.params.id);
+  if (index === -1)
+    return res.status(404).json({ message: 'Pastry not found!' });
+
+  const [deletedPastry] = pastries.splice(index, 1);
+  res.json({ message: 'Pastry deleted successfully!', pastry: deletedPastry });
+});
 
 
 /* -----------------------------
