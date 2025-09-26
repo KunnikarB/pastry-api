@@ -59,6 +59,14 @@ let pastries: Pastry[] = [
   },
 ];
 
+/********* Helpers *********/ 
+
+const findPastry = (id: number): Pastry | undefined =>
+  pastries.find(p => p.id === id);
+
+const updatePastry = (pastry: Pastry, data: Partial<PastryInput>) =>
+  Object.assign(pastry, data);
+
 /********* Routes *********/ 
 
 // GET all pastries
@@ -80,6 +88,23 @@ app.post('/pastries', (req, res) => {
   pastries.push(newPastry);
   res.json({message: 'Pastry added successfully!', pastry: newPastry});
 });
+
+// PUT (update) a pastry by id
+app.put('/pastries/:id', (req, res) => {
+  const pastry = findPastry(+req.params.id);
+  if (!pastry) return res.status(404).json({ message: 'Pastry not found!' });
+
+  // Use .partial() so all fields are optional for updates
+  const parsed = pastrySchema.partial().safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ errors: parsed.error.flatten().fieldErrors });
+  }
+
+  updatePastry(pastry, parsed.data);
+  res.json({ message: 'Pastry updated successfully!', pastry });
+});
+
+
 
 /* -----------------------------
    START SERVER
